@@ -1,21 +1,22 @@
 package com.ama.springdemoannotations;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+/* Constructor Injection*/
 /* We use the default bean id since we did not use an explicit bean id ==> @Componen("explicit bean id")*/
 @Component
+@Scope("singleton")
 public class BaseBallCoach implements Coach {
 	
 	private FortuneService myFortuneService;
 	
-	public BaseBallCoach() {
-		// TODO Auto-generated constructor stub
-	}
-	
 	@Autowired
-	public BaseBallCoach(FortuneService fortuneService) {
-		this.myFortuneService = fortuneService; 
+	public BaseBallCoach(@Qualifier("happyFortuneService")FortuneService theFortuneService) {
+		System.out.println("BaseBallCoach :: >> this th baseball bean");
+		this.myFortuneService = theFortuneService; 
 	}
 	
 	@Override
